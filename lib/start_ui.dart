@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/english_words.dart';
 import 'package:flutter_app/shop-cart.dart';
 import 'package:flutter_app/back.dart';
-void main() => runApp(new MyApp());
 
-class MyApp extends StatelessWidget {
+class StartUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget titleSelection = new Container(
