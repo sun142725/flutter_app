@@ -5,6 +5,10 @@ import 'package:flutter_app/back.dart';
 import 'package:flutter_app/start_ui.dart';
 import 'package:flutter_app/test_flow.dart';
 import 'package:flutter_app/image_icon.dart';
+import 'package:flutter_app/test_stack.dart';
+import 'package:flutter_app/test_decoration.dart';
+import 'package:flutter_app/test_transform.dart';
+import 'package:flutter_app/test_scaffold.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
@@ -44,6 +48,10 @@ class MyApp extends StatelessWidget {
         'start_ui': (BuildContext context) => new StartUI(),
         'test_flow': (BuildContext context) => new TestFlow(),
         'image_icon': (BuildContext context) => new TestImageIcon(),
+        'test_stack': (BuildContext context) => new TestStack(),
+        'test_decoration': (BuildContext context) => new TestDecoration(),
+        'test_transform': (BuildContext context) => new TestTransform(),
+        'test_scaffold': (BuildContext context) => new TestScaffold(),
       },
     );
   }
@@ -148,6 +156,50 @@ class _mainBody extends State<MainBody>{
                 Navigator.of(context).pushNamed('image_icon');
               }),
               new Text('image_icon')
+            ],
+          ),
+        ),
+        new Container(
+          width: 80.0,
+          child: new Column(
+            children: <Widget>[
+              new IconButton(icon: new Icon(Icons.location_on, color: Colors.red), onPressed: (){
+                Navigator.of(context).pushNamed('test_stack');
+              }),
+              new Text('test_stack')
+            ],
+          ),
+        ),
+        new Container(
+          width: 80.0,
+          child: new Column(
+            children: <Widget>[
+              new IconButton(icon: new Icon(Icons.format_paint, color: Colors.red), onPressed: (){
+                Navigator.of(context).pushNamed('test_decoration');
+              }),
+              new Text('decoration')
+            ],
+          ),
+        ),
+        new Container(
+          width: 80.0,
+          child: new Column(
+            children: <Widget>[
+              new IconButton(icon: new Icon(Icons.transform, color: Colors.red), onPressed: (){
+                Navigator.of(context).pushNamed('test_transform');
+              }),
+              new Text('transfrom')
+            ],
+          ),
+        ),
+        new Container(
+          width: 80.0,
+          child: new Column(
+            children: <Widget>[
+              new IconButton(icon: new Icon(Icons.pages, color: Colors.red), onPressed: (){
+                Navigator.of(context).pushNamed('test_scaffold');
+              }),
+              new Text('Scaffold')
             ],
           ),
         ),

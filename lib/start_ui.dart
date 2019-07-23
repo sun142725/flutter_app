@@ -130,7 +130,7 @@ class FavoriteWidget extends StatefulWidget {
 class _FavoriteWidgetState extends State<FavoriteWidget> {
   bool _isFavorite = true;
   int _favoriteCount = 41;
-  Widget _toggleFavorite () {
+  void _toggleFavorite () {
     debugPrint('211111111');
 //     Navigator.of(context).pushNamed('Test_back');
     setState((){

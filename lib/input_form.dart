@@ -51,12 +51,12 @@ class _InputFrom extends State<InputFrom> {
     );
   }
 
-  Widget _handleAccountValue (String value){
+  void _handleAccountValue (String value){
     setState(() {
       account = value;
      });
   }
-  Widget _handlePasswordValue (String value){
+  void _handlePasswordValue (String value){
     setState(() {
       Password = value;
     });
