@@ -58,21 +58,34 @@ class _TestScaffoldState extends State<TestScaffold> with SingleTickerProviderSt
       }).toList()): _selectedIndex == 1 ? new Text('business') : new Text('school'),
       drawer: new MyDrawer(),
       endDrawer: new MyDrawer(),
-      bottomNavigationBar: new BottomNavigationBar(
-          items: [
-            new BottomNavigationBarItem(icon: new Icon(Icons.home), title: new Text('home')),
-            new BottomNavigationBarItem(icon: new Icon(Icons.business), title: new Text('business')),
-            new BottomNavigationBarItem(icon: new Icon(Icons.school), title: new Text('school')),
+//      bottomNavigationBar: new BottomNavigationBar(
+//          items: [
+//            new BottomNavigationBarItem(icon: new Icon(Icons.home), title: new Text('home')),
+//            new BottomNavigationBarItem(icon: new Icon(Icons.business), title: new Text('business')),
+//            new BottomNavigationBarItem(icon: new Icon(Icons.school), title: new Text('school')),
+//          ],
+//        currentIndex: _selectedIndex,
+//        fixedColor: Colors.deepOrange,
+//        onTap: _onItemTapped,
+//      ),
+      bottomNavigationBar: new BottomAppBar(
+        color: Colors.white,
+        shape: new CircularNotchedRectangle(), // 底部打原型洞
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            new IconButton(icon: Icon(Icons.home), onPressed: _add,),
+            new SizedBox(),
+            new IconButton(icon: Icon(Icons.business), onPressed: _add)
           ],
-        currentIndex: _selectedIndex,
-        fixedColor: Colors.deepOrange,
-        onTap: _onItemTapped,
+        ),
       ),
       floatingActionButton: new FloatingActionButton(
         child: new Icon(Icons.add),
         onPressed: _add,
         backgroundColor: Colors.red,
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
@@ -85,7 +98,7 @@ class _TestScaffoldState extends State<TestScaffold> with SingleTickerProviderSt
   void _add(){
     setState(() {
       if(_selectedIndex == 2){
-        _selectedIndex--;
+        _selectedIndex = 0;
       } else _selectedIndex++;
     });
   }
