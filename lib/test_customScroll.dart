@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 class TestCustomScrollView extends StatelessWidget{
+  ScrollController _controller1 = new ScrollController();
+  ScrollController _controller2 = new ScrollController();
+  ScrollController _controller3 = new ScrollController();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Material(
       child: new CustomScrollView(
+        controller: _controller1,
         slivers: <Widget>[
           new SliverAppBar(
             pinned: true,

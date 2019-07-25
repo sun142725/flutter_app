@@ -94,6 +94,7 @@ class _mainBody extends State<MainBody>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    print('试试打印main');
     return new Wrap(
       textDirection: TextDirection.ltr,
       verticalDirection: VerticalDirection.down,
