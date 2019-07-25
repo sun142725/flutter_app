@@ -13,6 +13,7 @@ import 'package:flutter_app/test_singleScroller.dart';
 import 'package:flutter_app/test_listview.dart';
 import 'package:flutter_app/test_grid.dart';
 import 'package:flutter_app/test_customScroll.dart';
+import 'package:flutter_app/utils/pop_scope.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
@@ -32,18 +33,24 @@ class MyApp extends StatelessWidget {
               textAlign: TextAlign.center
             ),
         ),
-          body: new Container(
-              decoration: BoxDecoration(color: Colors.white),
-              constraints: BoxConstraints(
-                minWidth: double.infinity,
-                minHeight: 80.0,
+          body: new Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              new Container(
+                  decoration: BoxDecoration(color: Colors.white),
+                  constraints: BoxConstraints(
+                    minWidth: double.infinity,
+                    minHeight: 80.0,
+                  ),
+                  child: new ListView(
+                    children: <Widget>[
+                      new MainBody(),
+                    ],
+                  )
               ),
-              child: new ListView(
-                children: <Widget>[
-                  new MainBody(),
-                ],
-              )
-          ),
+              new PopScope(),
+            ],
+          )
       ),
       routes: {
         'input_form': (BuildContext context) => new InputF(),
