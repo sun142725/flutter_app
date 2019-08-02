@@ -14,6 +14,7 @@ import 'package:flutter_app/test_listview.dart';
 import 'package:flutter_app/test_grid.dart';
 import 'package:flutter_app/test_customScroll.dart';
 import 'package:flutter_app/utils/pop_scope.dart';
+import 'package:flutter_app/doctor.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
@@ -67,6 +68,7 @@ class MyApp extends StatelessWidget {
         'test_listview': (BuildContext context) => new TestListView(),
         'test_grid': (BuildContext context) => new TestGrid(),
         'test_custom_scroll': (BuildContext context) => new TestCustomScrollView(),
+        'doctor': (BuildContext context) => new MyDoctor(),
       },
     );
   }
@@ -101,7 +103,6 @@ class _mainBody extends State<MainBody>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    print('试试打印main');
     return new Wrap(
       textDirection: TextDirection.ltr,
       verticalDirection: VerticalDirection.down,
@@ -260,6 +261,17 @@ class _mainBody extends State<MainBody>{
                 Navigator.of(context).pushNamed('test_custom_scroll');
               }),
               new Text('customScrol')
+            ],
+          ),
+        ),
+        new Container(
+          width: 80.0,
+          child: new Column(
+            children: <Widget>[
+              new IconButton(icon: new Icon(Icons.accessible, color: Colors.red), onPressed: (){
+                Navigator.of(context).pushNamed('doctor');
+              }),
+              new Text('家庭医生')
             ],
           ),
         ),
