@@ -15,6 +15,9 @@ import 'package:flutter_app/test_grid.dart';
 import 'package:flutter_app/test_customScroll.dart';
 import 'package:flutter_app/utils/pop_scope.dart';
 import 'package:flutter_app/doctor.dart';
+import 'package:flutter_app/test_data_share.dart';
+import 'package:flutter_app/theme.dart';
+import 'package:flutter_app/test_dialog.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
@@ -23,6 +26,7 @@ class MyApp extends StatelessWidget {
     // TODO: implement build
     return new MaterialApp(
       title: 'flutter',
+      debugShowCheckedModeBanner: false,
       theme: new ThemeData(
           primaryColor: Colors.red
       ),
@@ -51,7 +55,25 @@ class MyApp extends StatelessWidget {
               ),
               new PopScope(),
             ],
-          )
+          ),
+        bottomNavigationBar: new BottomAppBar(
+          color: Colors.white,
+          shape: new CircularNotchedRectangle(), // 底部打原型洞
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              new IconButton(icon: Icon(Icons.home), onPressed: null,),
+              new SizedBox(),
+              new IconButton(icon: Icon(Icons.person), onPressed: null)
+            ],
+          ),
+        ),
+        floatingActionButton: new FloatingActionButton(
+          child: new Icon(Icons.add),
+          onPressed: null,
+          backgroundColor: Colors.red,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
       routes: {
         'input_form': (BuildContext context) => new InputF(),
@@ -69,6 +91,9 @@ class MyApp extends StatelessWidget {
         'test_grid': (BuildContext context) => new TestGrid(),
         'test_custom_scroll': (BuildContext context) => new TestCustomScrollView(),
         'doctor': (BuildContext context) => new MyDoctor(),
+        'test_data_share': (BuildContext context) => new InheritedWidgetTestRoute(),
+        'test_theme': (BuildContext context) => new TestTheme(),
+        'test_dialog': (BuildContext context) => new TestDialog(),
       },
     );
   }
@@ -272,6 +297,39 @@ class _mainBody extends State<MainBody>{
                 Navigator.of(context).pushNamed('doctor');
               }),
               new Text('家庭医生')
+            ],
+          ),
+        ),
+        new Container(
+          width: 80.0,
+          child: new Column(
+            children: <Widget>[
+              new IconButton(icon: new Icon(Icons.data_usage, color: Colors.red), onPressed: (){
+                Navigator.of(context).pushNamed('test_data_share');
+              }),
+              new Text('数据共享')
+            ],
+          ),
+        ),
+        new Container(
+          width: 80.0,
+          child: new Column(
+            children: <Widget>[
+              new IconButton(icon: new Icon(Icons.data_usage, color: Colors.red), onPressed: (){
+                Navigator.of(context).pushNamed('test_theme');
+              }),
+              new Text('test_theme')
+            ],
+          ),
+        ),
+        new Container(
+          width: 80.0,
+          child: new Column(
+            children: <Widget>[
+              new IconButton(icon: new Icon(Icons.data_usage, color: Colors.red), onPressed: (){
+                Navigator.of(context).pushNamed('test_dialog');
+              }),
+              new Text('test_dialog')
             ],
           ),
         ),
