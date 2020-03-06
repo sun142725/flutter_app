@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'dart:io';
 class MyDoctor extends StatefulWidget{
   _DoctorState createState () => new _DoctorState();
 }
 class _DoctorState extends State<MyDoctor>{
+  var _ipAddress = 'Unknown';
   ScrollController _controller = new ScrollController();
   final _loadingTag = '##loading##';
 
@@ -16,6 +19,45 @@ class _DoctorState extends State<MyDoctor>{
   };
   List _visitList = new List();
   bool _isLoading = true;
+  _getIPAddress() async {
+    var url = 'https://httpbin.org/ip';
+    var httpClient = new HttpClient();
+    Navigator.of(context).pop(true);
+
+    String result;
+    try {
+      var request = await httpClient.getUrl(Uri.parse(url));
+      var response = await request.close();
+      if (response.statusCode == HttpStatus.OK) {
+        var json = await response.transform(utf8.decoder).join();
+        var data = jsonDecode(json);
+        result = data['origin'];
+      } else {
+        result =
+        'Error getting IP address:\nHttp status ${response.statusCode}';
+      }
+    } catch (exception) {
+      result = 'Failed getting IP address';
+    }
+
+    // If the widget was removed from the tree while the message was in flight,
+    // we want to discard the reply rather than calling setState to update our
+    // non-existent appearance.
+//      if (!mounted) return;
+
+    setState(() {
+      _ipAddress = result;
+    });
+  }
+
+
+
+
+  void changeIsLoading(bool load){
+    setState(() {
+      _isLoading = load;
+    });
+  }
   void _addVisit([int num = 10]){
     changeIsLoading(false);
     Future.delayed(Duration(seconds: 2))
@@ -25,11 +67,7 @@ class _DoctorState extends State<MyDoctor>{
       });
     });
   }
-  void changeIsLoading(bool load){
-    setState(() {
-      _isLoading = load;
-    });
-  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -58,7 +96,28 @@ class _DoctorState extends State<MyDoctor>{
 
   @override
   Widget build(BuildContext context) {
-
+//    弹窗
+    Future<bool> showDeleteConfirmDialog1() {
+      return showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('提示'),
+              content: Text('你确定要删除该文件吗？'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("取消"),
+                  onPressed: () => Navigator.of(context).pop(), // 关闭对话框
+                ),
+                FlatButton(
+                  child: Text("获取ip地址"),
+                  onPressed: _getIPAddress, // 关闭对话框
+                ),
+              ],
+            );
+          }
+      );
+    }
     // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
@@ -179,7 +238,7 @@ class _DoctorState extends State<MyDoctor>{
                                         padding: EdgeInsets.only(right: 20.0),
                                         child: new Text('97%', style: new TextStyle(fontSize: 12.0, color: Color(0xFF8A8F9B))),
                                       ),
-                                      new Text('服务人次: 1999', style: new TextStyle(fontSize: 12.0, color: Color(0xFF8A8F9B)))
+                                      new Text('服务人次: $_ipAddress', style: new TextStyle(fontSize: 12.0, color: Color(0xFF8A8F9B)))
                                     ],
                                   ),
                                 ],
@@ -195,10 +254,8 @@ class _DoctorState extends State<MyDoctor>{
                                 textColor: Colors.white,
                                 padding: new EdgeInsets.symmetric(vertical: 0, horizontal: 0),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                                onPressed: (){
-                                  print('dianji');
-                                  print('打印Value$value');
-                                }),
+                                onPressed: showDeleteConfirmDialog1
+                            ),
                           ),
                         ],
                       ),
