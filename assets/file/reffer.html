@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大象医生</title>
+</head>
+<body>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <button id="btn">惦记</button>
+</body>
+</html>
+<script>
+    window.onload = function(){
+        // var url = "https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx26134235861642e113469491b291ff0000&package=250038883";  
+        // var obj = new XMLHttpRequest();  
+        // obj.open("GET", url, false);  
+        // // obj.Option(4) = 13056;  
+        // // obj.Option(6) = false; //false可以不自动跳转，截取服务端返回的302状态。  
+        // obj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");  
+        // obj.setRequestHeader("Referer", "https://www.cnblogs.com");  
+        // obj.send(); 
+        var btn = document.querySelector("#btn")
+        console.log(btn)
+        btn.onclick = function(){
+            alert(JSON.stringify(document.referrer))
+            console.log('惦记123', JSON.stringify(document.referrer))
+            console.log(JSON.stringify(document.referrer))
+            console.log(document.url)
+            // window.location.href = "https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx26153217934718a916893a6180faee0000&package=3745393355"
+        }
+    }
+</script>

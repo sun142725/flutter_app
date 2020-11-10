@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+div{
+    width: 300px;
+    height: 300px;
+    background-color: red;
+}
+</style>
+<body>
+    <input type="text" x-webkit-speech onwebkitspeechchange="foo()"  lang="zh-CN" />
+    <div>sahfgjdsgfuyshbfusbdsfu</div>
+</body>
+</html>
+<script>
+function ajax(time){
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', 'http://localhost:3000/test?time=' + time, false)
+    xhr.send()
+    xhr.onreadystatechange = function () {
+                        if(xhr.readyState==4) {
+                            console.log('sessionStorage', sessionStorage)
+                            sessionStorage.a = '1'
+                            if(xhr.status == 200) {
+                                alert(1)
+                            }
+                        }
+                    }
+}
+var _beforeUnload_time = 0, _gap_time = 0;
+var is_fireFox = navigator.userAgent.indexOf("Firefox")>-1;//是否是火狐浏览器
+window.onunload = function (){
+    _gap_time = new Date().getTime() - _beforeUnload_time;
+    ajax(_gap_time)
+    if(_gap_time <= 5)
+    $.post(pathName+"/back/bi!aaaa.s2?t="+_beforeUnload_time,{msg:"浏览器关闭",time:_gap_time},function(json){},"text");
+    else
+    $.post(pathName+"/back/bi!aaaa.s2?t="+_beforeUnload_time,{msg:"浏览器刷新",time:_gap_time},function(json){},"text");
+    }
+window.onbeforeunload = function (){
+    _beforeUnload_time = new Date().getTime();
+    if(is_fireFox)//火狐关闭执行
+    $.post(pathName+"/back/bi!aaaa.s2?t="+_beforeUnload_time,{msg:"火狐关闭"},function(json){},"text");
+};
+var input = document.querySelector('input')
+input.onwebkitspeechchange = function () {
+    console.log(input)
+}
+function foo () {
+    console.log(input)
+}
+input.onchange = function () {
+    console.log('onchange', input)
+}
+
+//   touch
+var divBox = document.querySelector('div')
+divBox.addEventListener('touchmove', function(e){
+    console.log(e)
+})
+</script>

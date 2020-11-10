@@ -19,6 +19,7 @@ import 'package:flutter_app/test_data_share.dart';
 import 'package:flutter_app/theme.dart';
 import 'package:flutter_app/test_dialog.dart';
 import 'package:flutter_app/test_io.dart';
+import 'package:flutter_app/test_webview.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
@@ -96,6 +97,7 @@ class MyApp extends StatelessWidget {
         'test_theme': (BuildContext context) => new TestTheme(),
         'test_dialog': (BuildContext context) => new TestDialog(),
         'test_io': (BuildContext context) => new TestIo(),
+        'test_webview': (BuildContext context) => new TestWebview(),
       },
     );
   }
@@ -343,6 +345,17 @@ class _mainBody extends State<MainBody>{
                 Navigator.of(context).pushNamed('test_io');
               }),
               new Text('test_io')
+            ],
+          ),
+        ),
+        new Container(
+          width: 80.0,
+          child: new Column(
+            children: <Widget>[
+              new IconButton(icon: new Icon(Icons.data_usage, color: Colors.red), onPressed: (){
+                Navigator.of(context).pushNamed('test_webview');
+              }),
+              new Text('webview')
             ],
           ),
         ),
